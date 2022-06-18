@@ -52,9 +52,15 @@
       <div class="tituloContenido card">
         <h5>Resultados de la búsqueda:</h5>
         <div class="divider"></div>
-        <button type="button" name="todos" class="btn-flat waves-effect" id="mostrarTodos">Mostrar Todos</button>
-      </div>
+        <div class="row">
+          <div class="col s12" id="resultado-busqueda">
 
+          </div>
+          <div class="col s12">
+            <button type="button" name="todos" class="btn-flat waves-effect" id="mostrarTodos">Mostrar Todos</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -99,6 +105,32 @@
           }
         }); 
 
+        $("#formulario").on("submit", function(e) {
+          e.preventDefault();
+          let url = $("#formulario").attr("action");
+          let method = $("#formulario").attr("method");
+          let data = $("#formulario").serialize();
+          
+          $.ajax({
+            url: url,
+            method: method,
+            data: data,
+            success: function(response) {
+              $("#resultado-busqueda").html(response);
+            }
+          });
+        });
+        $("#mostrarTodos").on("click",function(e) {
+          e.preventDefault();
+          let url = $("#formulario").attr("action");
+                  
+          $.ajax({
+            url: url,
+            success: function(response) {
+              $("#resultado-busqueda").html(response);
+            }
+          });
+        })
       }
     );
   </script>
