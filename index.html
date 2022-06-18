@@ -62,5 +62,28 @@
   <script type="text/javascript" src="js/ion.rangeSlider.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript">
+    $(document).ready(
+      function() {
+        $('select').material_select();
+        $.ajax({
+          url: "/mostrar_ciudad.php",
+          success: function(response) {
+            let select = $("#selectCiudad");
+            for(let indice in response) {
+              let opcion = response[indice];
+              let op = $("<option>");
+              op.val(opcion);
+              op.text(opcion);
+              select.append(op);
+            }
+            $(select).material_select('destroy');
+            $(select).material_select();
+            
+          }
+        });        
+      }
+    );
+  </script>
 </body>
 </html>
