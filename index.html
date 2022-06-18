@@ -81,7 +81,24 @@
             $(select).material_select();
             
           }
-        });        
+        });
+        $.ajax({
+          url: "/mostrar_tipo.php",
+          success: function(response) {
+            let select = $("#selectTipo");
+            for(let indice in response) {
+              let opcion = response[indice];
+              let op = $("<option>");
+              op.val(opcion);
+              op.text(opcion);
+              select.append(op);
+            }
+            $(select).material_select('destroy');
+            $(select).material_select();
+            
+          }
+        }); 
+
       }
     );
   </script>
